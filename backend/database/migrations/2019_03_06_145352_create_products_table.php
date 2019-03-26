@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateProductsTable
+ */
 class CreateProductsTable extends Migration
 {
     /**
@@ -17,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->string('name', 128);
-            $table->string('article', 16);
-            $table->integer('stock_quantity')->unsigned();
+            $table->string('article', 64);
+            $table->string('order_code', 8);
         });
     }
 

@@ -25,6 +25,6 @@ class Brand extends Model
      */
     public function categories()
     {
-        return $this->hasMany('App\Models\Category');
+        return $this->hasMany(Category::class);
     }
 }

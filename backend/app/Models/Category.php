@@ -29,4 +29,12 @@ class Category extends Model
     {
         return $this->belongsTo(Brand::class, 'brand_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
