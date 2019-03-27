@@ -14,6 +14,12 @@ use Illuminate\Http\Request;
 */
 Route::get('healthcheck', 'HealthCheckController@healthCheck');
 
+Route::get('brands', 'BrandController@getAllBrands');
+
+Route::get('categories', 'CategoryController@getCategoriesByBrand');
+
+Route::get('products', 'ProductController@getProductsByCategory');
+
 Route::group(
     ['prefix' => 'auth'],
     function ($router) {
