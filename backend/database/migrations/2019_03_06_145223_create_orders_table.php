@@ -16,8 +16,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->enum('delivery_status', ['processed', 'compiled', 'sent', 'received'])->default('processed');
-            $table->enum('payment_status', ['not paid', 'paid'])->default('not paid');
+            $table->float('price')->nullable();
+            $table->enum('delivery_status', ['Обрабатывается', 'Собран', 'Отправлен', 'Получен'])->default('Обрабатывается');
+            $table->enum('payment_status', ['Не оплачен', 'Оплачен'])->default('Не оплачен');
             $table->date('created_at');
         });
     }

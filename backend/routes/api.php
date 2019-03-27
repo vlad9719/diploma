@@ -20,6 +20,8 @@ Route::get('categories', 'CategoryController@getCategoriesByBrand');
 
 Route::get('products', 'ProductController@getProductsByCategory');
 
+Route::post('order', 'OrderController@saveOrder')->middleware('auth');
+
 Route::group(
     ['prefix' => 'auth'],
     function ($router) {
