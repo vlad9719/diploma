@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function() {
     Route::get('orders', 'OrderController@getAllOrders');
 
     Route::put('user', 'UserController@updateUser');
+
+    Route::put('order', 'OrderController@updateOrder');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

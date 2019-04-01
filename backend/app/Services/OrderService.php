@@ -59,6 +59,9 @@ class OrderService
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getAllOrders()
     {
         $user = auth()->user();
@@ -73,5 +76,36 @@ class OrderService
         }
 
         return $orders;
+    }
+
+    /**
+     * @param array $fields
+     * @return Order
+     */
+    public function updateOrder(array $fields): Order
+    {
+        $order = Order::findOrFail($fields['id']);
+
+        if (auth()->user()->isAdmin) {
+            foreach ($fields as $field => $value) {
+                if ($field === 'delivery_status' && $value === 'Получен') {
+                    continue;
+                }
+
+                $order[$field] = $value;
+            }
+
+            $order->save();
+            return $order;
+        }
+
+        if (isset($fields['delivery_status']) && $fields['delivery_status'] === 'Получен') {
+            $order->delivery_status = $fields['delivery_status'];
+            $order->save();
+            return $order;
+        }
+
+        return $order;
+
     }
 }
