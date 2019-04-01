@@ -58,4 +58,20 @@ class OrderService
             "orderedItems" => $order->ordered_items()->get(),
         ];
     }
+
+    public function getAllOrders()
+    {
+        $user = auth()->user();
+        $orders = [];
+        $ordersDetails = $user->orders()->get();
+        foreach ($ordersDetails as $orderDetails) {
+            $order = [
+                'orderDetails' => $orderDetails,
+                'orderedItems' => $orderDetails->ordered_items()->get(),
+            ];
+            array_push($orders, $order);
+        }
+
+        return $orders;
+    }
 }

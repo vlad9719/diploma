@@ -27,7 +27,7 @@ class UserService
      * @param array $fields
      * @return User
      */
-    public function create(array $fields): User
+    public function create(array $fields) : User
     {
         $user = $this->user->makeUser();
         $user->name = $fields['name'];
@@ -36,6 +36,21 @@ class UserService
         $user->organization = $fields['organization'];
         $user->phone = $fields['phone'];
         $user->save();
+        return $user;
+    }
+
+    /**
+     * @param array $fields
+     * @return User
+     */
+    public function update(array $fields) : User
+    {
+        $user = auth()->user();
+        $user->update($fields);
+        if (array_key_exists('password', $fields)) {
+            $user->password = Hash::make($fields['password'], ['rounds' => 12]);
+            $user->save();
+        }
         return $user;
     }
 }

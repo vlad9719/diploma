@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Services\OrderService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class OrderController
@@ -21,9 +20,17 @@ class OrderController extends Controller
      */
     public function saveOrder(OrderService $orderService, OrderRequest $orderRequest) : JsonResponse
     {
-        $validated = $orderRequest->validated();
+        $orderRequest->validateResolved();
         $order = $orderService->saveOrder($orderRequest->items);
         $this->response->data = $order;
+        return new JsonResponse($this->response, JsonResponse::HTTP_OK);
+    }
+
+    public function getAllOrders(OrderService $orderService)
+    {
+        $orders = $orderService->getAllOrders();
+
+        $this->response->data['orders'] = $orders;
         return new JsonResponse($this->response, JsonResponse::HTTP_OK);
     }
 }
