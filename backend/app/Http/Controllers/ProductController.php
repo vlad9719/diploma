@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,7 +23,17 @@ class ProductController extends Controller
         $productsCategory = $request->input('category');
         $products = $productService->getProductsByCategory($productsCategory);
 
-        $this->response->data = $products;
+        $this->response->data['products'] = $products;
+        return new JsonResponse($this->response, JsonResponse::HTTP_OK);
+    }
+
+    public function search(SearchRequest $request, ProductService $productService) : JsonResponse
+    {
+        $searchParameter = $request->validated();
+        $name = $searchParameter['name'];
+        $products = $productService->search($name);
+
+        $this->response->data['products'] = $products;
         return new JsonResponse($this->response, JsonResponse::HTTP_OK);
     }
 }

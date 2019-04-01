@@ -22,7 +22,7 @@ class CategoryController extends Controller
         $brand = $request->input('brand');
         $categories = $categoryService->getCategoriesByBrand($brand);
 
-        $this->response->data = $categories;
+        $this->response->data['categories'] = $categories;
         return new JsonResponse($this->response, JsonResponse::HTTP_OK);
     }
 }

@@ -19,7 +19,7 @@ class BrandController extends Controller
     {
         $allCategories = $categoryService->getAllBrands();
 
-        $this->response->data = $allCategories;
+        $this->response->data['brands'] = $allCategories;
         return new JsonResponse($this->response, JsonResponse::HTTP_OK);
     }
 }

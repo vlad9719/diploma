@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
@@ -25,5 +26,16 @@ class ProductService
 
         $products = $category->products;
         return $products;
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function search(string $name)
+    {
+        $searchResult = Product::where('name', 'like', '%' . $name . '%')->get();
+
+        return $searchResult;
     }
 }

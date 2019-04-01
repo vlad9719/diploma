@@ -21,6 +21,8 @@ Route::get('categories', 'CategoryController@getCategoriesByBrand');
 
 Route::get('products', 'ProductController@getProductsByCategory');
 
+Route::get('search', 'ProductController@search');
+
 Route::middleware('auth')->group(function() {
 
     Route::post('order', 'OrderController@saveOrder');
