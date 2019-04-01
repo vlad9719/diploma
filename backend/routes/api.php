@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('healthcheck', 'HealthCheckController@healthCheck');
+
 Route::get('brands', 'BrandController@getAllBrands');
 
 Route::get('categories', 'CategoryController@getCategoriesByBrand');
@@ -22,18 +25,33 @@ Route::middleware('auth')->group(function() {
 
     Route::post('order', 'OrderController@saveOrder');
 
-    Route::get('orders', 'OrderController@getAllOrders');
+    Route::get('order/{id}', 'OrderController@getOrderById');
+
+    Route::get('orders/{id}', 'OrderController@getAllOrdersByUserId');
 
     Route::put('user', 'UserController@updateUser');
 
     Route::put('order', 'OrderController@updateOrder');
+
+    Route::delete('order/{id}', 'OrderController@deleteOrder');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::group(
 
-    Route::get('healthcheck', 'HealthCheckController@healthCheck');
+    ['prefix' => 'admin'],
 
-});
+    function ($router) {
+
+        Route::middleware(['auth', 'admin'])->group(function () {
+
+            Route::get('orders', 'AdminController@getAllOrders');
+
+            Route::get('orders/{id}', 'AdminController@getOrdersById');
+
+            Route::put('order', 'AdminController@updateOrder');
+        });
+    }
+);
 
 Route::group(
 

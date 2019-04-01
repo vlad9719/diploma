@@ -6,6 +6,7 @@ namespace App\Services;
 use App\Models\Order;
 use App\Models\OrderedItem;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
@@ -55,22 +56,47 @@ class OrderService
 
         return [
             "orderDetails" => $order->fresh(),
-            "orderedItems" => $order->ordered_items()->get(),
+            "orderedItems" => $order->ordered_items()
+                ->leftJoin('products', 'ordered_items.product_id', '=', 'products.id')
+                ->select('products.*', 'ordered_items.quantity')
+                ->get(),
         ];
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getOrderById(int $id)
+    {
+        $orderDetails = Order::findOrFail($id);
+        $orderedItems = $orderDetails
+            ->ordered_items()
+            ->leftJoin('products', 'ordered_items.product_id', '=', 'products.id')
+            ->select('products.*', 'ordered_items.quantity')->get();
+
+        $order = [
+            'orderDetails' => $orderDetails,
+            'orderedItems' => $orderedItems,
+        ];
+        return $order;
     }
 
     /**
      * @return array
      */
-    public function getAllOrders()
+    public function getAllOrdersByUserId(int $id)
     {
-        $user = auth()->user();
         $orders = [];
-        $ordersDetails = $user->orders()->get();
+
+        $ordersDetails = User::findOrFail($id)->orders()->get();
         foreach ($ordersDetails as $orderDetails) {
             $order = [
                 'orderDetails' => $orderDetails,
-                'orderedItems' => $orderDetails->ordered_items()->get(),
+                'orderedItems' => $orderDetails
+                    ->ordered_items()
+                    ->leftJoin('products', 'ordered_items.product_id', '=', 'products.id')
+                    ->select('products.*', 'ordered_items.quantity')->get(),
             ];
             array_push($orders, $order);
         }
@@ -86,19 +112,6 @@ class OrderService
     {
         $order = Order::findOrFail($fields['id']);
 
-        if (auth()->user()->isAdmin) {
-            foreach ($fields as $field => $value) {
-                if ($field === 'delivery_status' && $value === 'Получен') {
-                    continue;
-                }
-
-                $order[$field] = $value;
-            }
-
-            $order->save();
-            return $order;
-        }
-
         if (isset($fields['delivery_status']) && $fields['delivery_status'] === 'Получен') {
             $order->delivery_status = $fields['delivery_status'];
             $order->save();
@@ -106,6 +119,15 @@ class OrderService
         }
 
         return $order;
+    }
 
+    /**
+     * @param int $id
+     */
+    public function deleteOrder(int $id)
+    {
+        $order = Order::findOrFail($id);
+
+        $order->delete();
     }
 }

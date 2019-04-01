@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use App\Models\User;
 use App\Services\OrderService;
 use Illuminate\Http\JsonResponse;
-use Psy\Util\Json;
 
 /**
  * Class OrderController
@@ -25,7 +25,25 @@ class OrderController extends Controller
     {
         $orderRequest->validateResolved();
         $order = $orderService->saveOrder($orderRequest->items);
-        $this->response->data = $order;
+        $this->response->data['order'] = $order;
+        return new JsonResponse($this->response, JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function getOrderById(OrderService $orderService, int $id)
+    {
+        $user = auth()->user();
+        $order = Order::findOrFail($id);
+
+        if ($user->cant('view', $order)) {
+            $this->response->error = 'You cannot read order of another user';
+            return new JsonResponse($this->response, JsonResponse::HTTP_FORBIDDEN);
+        }
+
+        $this->response->data['order'] = $orderService->getOrderById($id);
         return new JsonResponse($this->response, JsonResponse::HTTP_OK);
     }
 
@@ -33,9 +51,15 @@ class OrderController extends Controller
      * @param OrderService $orderService
      * @return JsonResponse
      */
-    public function getAllOrders(OrderService $orderService)
+    public function getAllOrdersByUserId(OrderService $orderService, int $id)
     {
-        $orders = $orderService->getAllOrders();
+        $user = User::findOrFail($id);
+        if ($user->cant('view', $user)) {
+            $this->response->error = 'You cannot read orders of another user';
+            return new JsonResponse($this->response, JsonResponse::HTTP_FORBIDDEN);
+        }
+
+        $orders = $orderService->getAllOrdersByUserId($id);
 
         $this->response->data['orders'] = $orders;
         return new JsonResponse($this->response, JsonResponse::HTTP_OK);
@@ -62,6 +86,26 @@ class OrderController extends Controller
 
         $this->response->data['Order'] = $newOrder;
 
+        return new JsonResponse($this->response, JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * @param OrderService $orderService
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function deleteOrder(OrderService $orderService, int $id) : JsonResponse
+    {
+        $user = auth()->user();
+        $order = Order::findOrFail($id);
+        if ($user->cant('delete', $order)) {
+            $this->response->error['order'] = 'You cannot delete an order made by another user';
+            return new JsonResponse($this->response, JsonResponse::HTTP_FORBIDDEN);
+        }
+
+        $orderService->deleteOrder($id);
+
+        $this->response->data['Message'] = 'Order has been successfully deleted';
         return new JsonResponse($this->response, JsonResponse::HTTP_OK);
     }
 }
