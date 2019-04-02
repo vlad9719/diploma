@@ -16,7 +16,7 @@ export const login = (history, userData) => {
         history.push('/home');
       })
       .catch(err => {
-        const error = err.response.data.errors;
+        const error = err.response.data.error;
         dispatch({
           type: ERROR,
           payload: { login: error }

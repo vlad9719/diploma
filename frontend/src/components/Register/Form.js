@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './index.scss';
-
 export default function Form(props) {
   return (
     <form
       className="mt-5 mb-5 offset-sm-2 offset-md-3 offset-lg-4 col-sm-8 col-md-6 col-lg-4 border"
       onChange={props.handleChange}>
-      <h2 className="text-center mt-3 mb-3">Регистрация</h2>
+      <h3 className="text-center mt-3 mb-3">Регистрация</h3>
       <div className="form-group">
         <label htmlFor="name">Ваше имя:</label>
         <input

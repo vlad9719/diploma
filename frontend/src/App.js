@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Register from 'components/Register';
+import Login from 'components/Login';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from 'redux/store';
@@ -17,6 +18,7 @@ class App extends Component {
           <Layout>
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
           </Layout>
         </Router>
       </Provider>
