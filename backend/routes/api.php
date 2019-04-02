@@ -13,65 +13,69 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('healthcheck', 'HealthCheckController@healthCheck');
+Route::middleware(['cors'])->group(function () {
 
-Route::get('brands', 'BrandController@getAllBrands');
+    Route::get('healthcheck', 'HealthCheckController@healthCheck');
 
-Route::get('categories', 'CategoryController@getCategoriesByBrand');
+    Route::get('brands', 'BrandController@getAllBrands');
 
-Route::get('products', 'ProductController@getProductsByCategory');
+    Route::get('categories', 'CategoryController@getCategoriesByBrand');
 
-Route::get('search', 'ProductController@search');
+    Route::get('products', 'ProductController@getProductsByCategory');
 
-Route::middleware('auth')->group(function() {
+    Route::get('search', 'ProductController@search');
 
-    Route::post('order', 'OrderController@saveOrder');
+    Route::middleware('auth')->group(function () {
 
-    Route::get('order/{id}', 'OrderController@getOrderById');
+        Route::post('order', 'OrderController@saveOrder');
 
-    Route::get('orders/{id}', 'OrderController@getAllOrdersByUserId');
+        Route::get('order/{id}', 'OrderController@getOrderById');
 
-    Route::put('user', 'UserController@updateUser');
+        Route::get('orders/{id}', 'OrderController@getAllOrdersByUserId');
 
-    Route::put('order', 'OrderController@updateOrder');
+        Route::put('user', 'UserController@updateUser');
 
-    Route::delete('order/{id}', 'OrderController@deleteOrder');
+        Route::put('order', 'OrderController@updateOrder');
+
+        Route::delete('order/{id}', 'OrderController@deleteOrder');
+    });
+
+    Route::group(
+
+        ['prefix' => 'admin'],
+
+        function ($router) {
+
+            Route::middleware(['auth', 'admin'])->group(function () {
+
+                Route::get('orders', 'AdminController@getAllOrders');
+
+                Route::get('orders/{id}', 'AdminController@getOrdersById');
+
+                Route::put('order', 'AdminController@updateOrder');
+            });
+        }
+    );
+
+    Route::group(
+
+        ['prefix' => 'auth'],
+
+        function ($router) {
+
+            Route::post('register', 'UserController@saveUser');
+
+            Route::post('login', 'AuthController@login');
+
+            Route::middleware('auth')->group(function () {
+
+                Route::post('logout', 'AuthController@logout');
+
+                Route::post('refresh', 'AuthController@refresh');
+
+                Route::post('me', 'AuthController@me');
+            });
+        }
+    );
+
 });
-
-Route::group(
-
-    ['prefix' => 'admin'],
-
-    function ($router) {
-
-        Route::middleware(['auth', 'admin'])->group(function () {
-
-            Route::get('orders', 'AdminController@getAllOrders');
-
-            Route::get('orders/{id}', 'AdminController@getOrdersById');
-
-            Route::put('order', 'AdminController@updateOrder');
-        });
-    }
-);
-
-Route::group(
-
-    ['prefix' => 'auth'],
-
-    function ($router) {
-
-        Route::post('register', 'UserController@saveUser');
-
-        Route::post('login', 'AuthController@login');
-
-        Route::middleware('auth')->group(function () {
-
-            Route::post('logout', 'AuthController@logout');
-
-            Route::post('refresh', 'AuthController@refresh');
-
-            Route::post('me', 'AuthController@me');
-        });
-    }
-);

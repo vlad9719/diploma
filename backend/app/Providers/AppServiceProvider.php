@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\Cors;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Http\Kernel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $kernel = $this->app->make(Kernel::class);
+        $kernel->prependMiddleware(Cors::class);
     }
 }
