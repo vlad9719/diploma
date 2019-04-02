@@ -2,57 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb7f8389-1030-4a0e-aaa2-4467a08eed85" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../frontend/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.eslintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/frontend.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.npmrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.prettierignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.prettierrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/now.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/renovate.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/App.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Home.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Layout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Navbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Register/Form.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Register/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Register/index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/constants/common.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/redux/actions/common.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/redux/actions/error.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/redux/actions/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/redux/actions/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/redux/reducers/common.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/redux/reducers/error.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/redux/reducers/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/redux/reducers/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/redux/store.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/registerServiceWorker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/utils/request.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/utils/token.helper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/utils/validation/is-empty.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -354,12 +305,12 @@
       <workItem from="1554193541007" duration="950000" />
       <workItem from="1554202499005" duration="625000" />
       <workItem from="1554210912543" duration="2149000" />
-      <workItem from="1554215680024" duration="2422000" />
+      <workItem from="1554215680024" duration="3683000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107576000" />
+    <option name="totallyTimeSpent" value="108837000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
