@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from '../../utils/validation/is-empty';
+import { Link } from 'react-router-dom';
 
 export default function Form(props) {
   return (
@@ -40,6 +41,9 @@ export default function Form(props) {
         onClick={props.handleSubmit}>
         Войти на сайт
       </button>
+      <div className="mb-3 text-center">
+        <Link to="/register">Регистрация</Link>
+      </div>
     </form>
   );
 }
