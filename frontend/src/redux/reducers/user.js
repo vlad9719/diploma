@@ -3,7 +3,7 @@ import isEmpty from '../../utils/validation/is-empty';
 import Cookies from 'js-cookie';
 
 const initialState = {
-  isAuthenticated: Cookies.get('accessToken') !== null,
+  isAuthenticated: Cookies.get('accessToken') != null,
   userInfo: [],
   loader: true
 };
