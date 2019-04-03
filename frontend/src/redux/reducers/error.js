@@ -2,7 +2,8 @@ import { ERROR, UNSET_ERROR } from '../actions/types';
 
 const initialState = {
   register: {},
-  login: {}
+  login: {},
+  update: {}
 };
 
 export default function(state = initialState, action) {

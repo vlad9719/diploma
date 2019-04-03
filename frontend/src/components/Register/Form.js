@@ -15,8 +15,12 @@ export default function Form(props) {
           id="name"
           placeholder="Имя"
           title="Пожалуйста, введите Ваше настоящее имя"
+          aria-describedby="nameHelp"
           required
         />
+        <span id="nameHelp" className="form-text text-muted">
+          Без пробелов
+        </span>
         {props.errors.name && (
           <span className="text-danger">{props.errors.name}</span>
         )}
@@ -84,13 +88,13 @@ export default function Form(props) {
           <span className="text-danger">{props.errors.password}</span>
         )}
         <span id="passwordHelp" className="form-text text-muted">
-          Пароль должен содержать не менее 8 символов. Допускаются только буквы
+          Пароль должен содержать не менее 8 символов без пробелов. Допускаются только буквы
           латинского алфавита, цифры и знаки
         </span>
       </div>
       <button
         type="button"
-        className="btn btn-primary col-sm-12 mb-3"
+        className="btn btn-outline-primary col-sm-12 mb-3"
         onClick={props.handleSubmit}>
         Подтвердить
       </button>

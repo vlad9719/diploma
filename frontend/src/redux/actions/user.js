@@ -1,6 +1,7 @@
 import request from 'utils/request';
-import { ERROR, SET_CURRENT_USER } from './types';
+import { ERROR, SET_CURRENT_USER, SET_UPDATING_USER_STATUS } from './types';
 import { setToken, unsetToken } from '../../utils/request';
+import { unsetErrors } from './error';
 
 export const login = (history, userData) => {
   return async dispatch => {
@@ -20,6 +21,25 @@ export const login = (history, userData) => {
         dispatch({
           type: ERROR,
           payload: { login: error }
+        });
+      });
+  };
+};
+
+export const update = userData => {
+  return dispatch => {
+    return request('PUT', 'api/user', userData)
+      .then(response => {
+        dispatch(setUpdatingUserStatus(false));
+        dispatch(setCurrentUser(response.data.User));
+      })
+      .catch(err => {
+        const errors = err.response.data.error;
+        dispatch({
+          type: ERROR,
+          payload: {
+            update: errors
+          }
         });
       });
   };
@@ -57,6 +77,15 @@ export const me = () => {
           payload: err
         });
       });
+  };
+};
+
+export const setUpdatingUserStatus = (status) => {
+  return dispatch => {
+    dispatch({
+      type: SET_UPDATING_USER_STATUS,
+      payload: status
+    });
   };
 };
 

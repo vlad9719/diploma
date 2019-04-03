@@ -25,7 +25,7 @@ class Navbar extends Component {
             {userInfo.name}
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <Link className="dropdown-item" to="/">
+            <Link className="dropdown-item" to="/profile">
               Мой профиль
             </Link>
             <Link to="/" className="dropdown-item">
@@ -57,7 +57,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          <img src={logo} />
+          <img src={logo} alt="ООО Ремавтоснаб"/>
         </Link>
         <button
           className="navbar-toggler"

@@ -1,11 +1,11 @@
-import { SET_CURRENT_USER, UPDATE_CURRENT_USER } from '../../redux/actions/types';
+import { SET_CURRENT_USER, UPDATE_CURRENT_USER, SET_UPDATING_USER_STATUS } from '../../redux/actions/types';
 import isEmpty from '../../utils/validation/is-empty';
 import Cookies from 'js-cookie';
 
 const initialState = {
   isAuthenticated: Cookies.get('accessToken') != null,
   userInfo: [],
-  loader: true
+  isUpdating: false,
 };
 
 export default function(state = initialState, action) {
@@ -21,6 +21,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         userInfo: Object.assign(state.userInfo, action.payload)
+      };
+    case SET_UPDATING_USER_STATUS:
+      return {
+        ...state,
+        isUpdating: action.payload
       };
     default:
       return state;

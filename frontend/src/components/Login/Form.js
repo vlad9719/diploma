@@ -37,7 +37,7 @@ export default function Form(props) {
       )}
       <button
         type="button"
-        className="btn btn-primary col-sm-12 mb-3"
+        className="btn btn-outline-primary col-sm-12 mb-3"
         onClick={props.handleSubmit}>
         Войти на сайт
       </button>
