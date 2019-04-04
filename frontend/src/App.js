@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { me } from 'redux/actions/user';
 import PropTypes from 'prop-types';
 import Profile from 'components/Profile';
+import Brands from 'components/Brands';
 
 import Home from 'components/Home';
 import Layout from 'components/Layout';
@@ -31,6 +32,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/catalog" component={Brands} />
           </Layout>
         </Router>
       </Provider>

@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 const initialState = {
   isAuthenticated: Cookies.get('accessToken') != null,
   userInfo: [],
-  isUpdating: false,
+  isUpdating: false
 };
 
 export default function(state = initialState, action) {

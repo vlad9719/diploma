@@ -9,3 +9,5 @@ export const SIGN_UP_COMPLETED = 'SIGN_UP_COMPLETED';
 
 export const END_LOADING = 'END_LOADING';
 export const START_LOADING = 'START_LOADING';
+
+export const SET_BRANDS = 'SET_BRANDS';

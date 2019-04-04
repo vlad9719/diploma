@@ -45,6 +45,7 @@ class UpdateUserRequest extends FormRequest
             'email.max' => 'Поле должно иметь менее 124 символов.',
             'regex' => 'Поле заполнено некорректно.',
             'email.unique' => 'Пользователь с таким :attribute уже зарегистрирован',
+            'email' => 'Неверный email-адрес',
         ];
     }
 }
