@@ -12,7 +12,7 @@ class Navbar extends Component {
   render() {
     let { isAuthenticated, userInfo } = this.props.user;
     let authLinks = (
-      <ul className="navbar-nav mr-0">
+      <ul className="navbar-nav ml-lg-5">
         <li className="nav-item dropdown">
           <a
             className="nav-link dropdown-toggle active"
@@ -40,7 +40,7 @@ class Navbar extends Component {
     );
 
     let guestLinks = (
-      <ul className="navbar-nav mr-0">
+      <ul className="navbar-nav mr-lg-4">
         <li className="nav-item">
           <Link className="nav-link active" to="/register">
             Регистрация
@@ -57,7 +57,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          <img src={logo} alt="ООО Ремавтоснаб"/>
+          <img src={logo} alt="ООО Ремавтоснаб" />
         </Link>
         <button
           className="navbar-toggler"
@@ -78,12 +78,17 @@ class Navbar extends Component {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="/catalog">
                 Каталог
               </Link>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0 ml-auto mr-5">
+          <div className="navbar-text ml-auto mr-lg-4">
+            Телефон:
+            <a href="tel:8 (017)-380-23-72">8 (017)-380-23-72</a>
+          </div>
+          {isAuthenticated ? authLinks : guestLinks}
+          <form className="form-inline my-2 my-lg-0">
             <input
               className="form-control mr-sm-3"
               type="search"
@@ -96,7 +101,6 @@ class Navbar extends Component {
               Найти
             </button>
           </form>
-          {isAuthenticated ? authLinks : guestLinks}
         </div>
       </nav>
     );
