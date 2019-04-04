@@ -10,9 +10,11 @@ export default function Table(props) {
           return (
             <div className="border col-sm-12 col-md-6 col-12 col-lg-4 ml-0" key={category.id}>
               <a
-                href={`products/${category.name}`}
+                href={`../products/${category.name}`}
                 className="d-flex justify-content-center align-items-center">
-                <span className="category-link text-center">{category.name}</span>
+                <span className="category-link text-center">
+                  {`${category.id}. ${category.name}`}
+                </span>
               </a>
             </div>
           );

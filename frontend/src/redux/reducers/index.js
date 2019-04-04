@@ -4,11 +4,13 @@ import userReducer from './user';
 import errorReducer from './error';
 import brandsReducer from './brands';
 import categoriesReducer from './categories';
+import productsReducer from './products';
 
 export default combineReducers({
   common: commonReducer,
   user: userReducer,
   errors: errorReducer,
   brands: brandsReducer,
-  categories: categoriesReducer
+  categories: categoriesReducer,
+  products: productsReducer
 });

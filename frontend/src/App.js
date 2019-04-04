@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import Profile from 'components/Profile';
 import Brands from 'components/Brands';
 import Categories from 'components/Categories';
+import Products from 'components/Products';
 
 import Home from 'components/Home';
 import Layout from 'components/Layout';
@@ -35,6 +36,7 @@ class App extends Component {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/catalog" component={Brands} />
             <Route exact path="/categories/:brand" component={Categories} />
+            <Route exact path="/products/:category" component={Products} />
           </Layout>
         </Router>
       </Provider>
