@@ -10,7 +10,7 @@ export default function Table(props) {
           return (
             <div className="row border autoparts-brand" key={brand.id}>
               <a
-                href="category"
+                href={`categories/${brand.name}`}
                 className="col-sm-12 d-flex justify-content-center align-items-center">
                 <span className="brand-link">{brand.name}</span>
               </a>

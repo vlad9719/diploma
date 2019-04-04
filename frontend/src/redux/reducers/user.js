@@ -1,4 +1,8 @@
-import { SET_CURRENT_USER, UPDATE_CURRENT_USER, SET_UPDATING_USER_STATUS } from '../../redux/actions/types';
+import {
+  SET_CURRENT_USER,
+  UPDATE_CURRENT_USER,
+  SET_UPDATING_USER_STATUS
+} from '../../redux/actions/types';
 import isEmpty from '../../utils/validation/is-empty';
 import Cookies from 'js-cookie';
 

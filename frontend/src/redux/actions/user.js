@@ -14,7 +14,7 @@ export const login = (history, userData) => {
       .then(response => {
         const user = response.data.User;
         dispatch(setCurrentUser(user));
-        history.push('/home');
+        history.push('/');
       })
       .catch(err => {
         const error = err.response.data.error;
@@ -100,6 +100,6 @@ export const logoutUser = history => dispatch => {
   return request('POST', 'api/auth/logout').then(() => {
     unsetToken();
     dispatch(setCurrentUser({}));
-    history.push('/home');
+    history.push('/');
   });
 };
