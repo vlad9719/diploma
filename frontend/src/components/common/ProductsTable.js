@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { MDBDataTable } from 'mdbreact';
+import './index.css';
 
-export default function Table(props) {
+export default function ProductsTable(props) {
   const rows = props.products.map(product => {
     let row = {
       name: product.name,
@@ -13,8 +13,8 @@ export default function Table(props) {
 
     if (props.isAuthenticated) {
       row['Добавление в корзину'] = (
-        <button className="btn btn-outline-secondary">
-          Добавление в корзину
+        <button className="btn btn-outline-primary col-sm-12">
+          Добавить в корзину
         </button>
       );
     }
@@ -45,7 +45,7 @@ export default function Table(props) {
 
   if (props.isAuthenticated) {
     columns.push({
-      label: 'Добавить в корзину',
+      label: 'Добавление в корзину',
       field: 'Добавление в корзину',
       sort: 'asc',
       width: 200
@@ -58,18 +58,26 @@ export default function Table(props) {
   };
 
   return (
-    <MDBDataTable
-      className="offset-sm-1 col-sm-10"
-      striped
-      bordered
-      small
-      data={tableData}
-    />
+    <div className="offset-sm-1 col-sm-10 my-5">
+      <h3 className="text-center my-5">{props.tableName}</h3>
+      <MDBDataTable
+        striped
+        bordered
+        small
+        data={tableData}
+        searchLabel="Поиск"
+        entriesLabel="Строк на странице"
+        paginationLabel={['Назад', 'Вперёд']}
+        infoLabel={['Строки', '-', 'из']}
+        responsiveXl={true}
+      />
+    </div>
   );
 }
 
-Table.propTypes = {
-  products: PropTypes.object,
+ProductsTable.propTypes = {
+  products: PropTypes.array,
   category: PropTypes.string,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  tableName: PropTypes.string
 };

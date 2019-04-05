@@ -17,7 +17,12 @@ class Categories extends React.Component {
 
   render() {
     if (this.props.categories.items.length) {
-      return <Table categories={this.props.categories.items} />;
+      return (
+        <Table
+          categories={this.props.categories.items}
+          brand={this.props.match.params.brand}
+        />
+      );
     }
 
     return null;

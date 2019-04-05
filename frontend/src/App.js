@@ -11,6 +11,7 @@ import Profile from 'components/Profile';
 import Brands from 'components/Brands';
 import Categories from 'components/Categories';
 import Products from 'components/Products';
+import Search from 'components/Search';
 
 import Home from 'components/Home';
 import Layout from 'components/Layout';
@@ -37,6 +38,7 @@ class App extends Component {
             <Route exact path="/catalog" component={Brands} />
             <Route exact path="/categories/:brand" component={Categories} />
             <Route exact path="/products/:category" component={Products} />
+            <Route exact path="/search/:query" component={Search} />
           </Layout>
         </Router>
       </Provider>

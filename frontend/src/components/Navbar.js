@@ -5,9 +5,28 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions/user';
 import { withRouter } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { search } from '../redux/actions/products';
 
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchString: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const searchString = event.target.value;
+    this.setState({
+      searchString
+    });
+  }
+
   onLogout = () => this.props.logoutUser(this.props.history);
+  onSearch = () => {
+    this.props.history.push(`/search/${this.state.searchString}`);
+  };
 
   render() {
     let { isAuthenticated, userInfo } = this.props.user;
@@ -94,10 +113,12 @@ class Navbar extends Component {
               type="search"
               placeholder="Поиск запчасти"
               aria-label="Search"
+              onChange={this.handleChange}
             />
             <button
               className="btn btn-outline-secondary my-2 my-sm-0"
-              type="submit">
+              type="submit"
+              onClick={this.onSearch}>
               Найти
             </button>
           </form>
@@ -110,14 +131,18 @@ class Navbar extends Component {
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   user: state.user
 });
 
+const mapDispatchToProps = {
+  logoutUser
+};
+
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  mapDispatchToProps
 )(withRouter(Navbar));
