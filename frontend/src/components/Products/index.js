@@ -1,15 +1,11 @@
 import React from 'react';
-import ProductsTable from '../common/ProductsTable';
+import ProductsListing from '../common/ProductsListing';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProducts } from '../../redux/actions/products';
 
 class Products extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const category = this.props.match.params.category;
     this.props.getProducts(category);
@@ -19,7 +15,7 @@ class Products extends React.Component {
     if (this.props.products.items.length) {
       return (
         <div>
-          <ProductsTable
+          <ProductsListing
             products={this.props.products.items}
             tableName={`Запчасти группы "${this.props.match.params.category}"`}
             isAuthenticated={this.props.user.isAuthenticated}

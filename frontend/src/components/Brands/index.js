@@ -6,10 +6,6 @@ import PropTypes from 'prop-types';
 import { getBrands } from '../../redux/actions/brands';
 
 class Catalog extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.getBrands();
   }

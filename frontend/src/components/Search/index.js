@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductsTable from '../common/ProductsTable';
+import ProductsListing from '../common/ProductsListing';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -27,7 +27,7 @@ class Search extends React.Component {
     if (this.props.products.items.length && !this.state.isLoading) {
       return (
         <div>
-          <ProductsTable
+          <ProductsListing
             products={this.props.products.items}
             isAuthenticated={this.props.user.isAuthenticated}
             tableName={`Результаты поиска по запросу "${this.state.queryString}"`}

@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions/user';
 import { withRouter } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import { search } from '../redux/actions/products';
 
 class Navbar extends Component {
   constructor(props) {

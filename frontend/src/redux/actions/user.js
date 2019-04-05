@@ -1,7 +1,6 @@
 import request from 'utils/request';
 import { ERROR, SET_CURRENT_USER, SET_UPDATING_USER_STATUS } from './types';
 import { setToken, unsetToken } from '../../utils/request';
-import { unsetErrors } from './error';
 
 export const login = (history, userData) => {
   return async dispatch => {

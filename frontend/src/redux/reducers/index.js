@@ -5,6 +5,7 @@ import errorReducer from './error';
 import brandsReducer from './brands';
 import categoriesReducer from './categories';
 import productsReducer from './products';
+import cartReducer from './cart';
 
 export default combineReducers({
   common: commonReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   errors: errorReducer,
   brands: brandsReducer,
   categories: categoriesReducer,
-  products: productsReducer
+  products: productsReducer,
+  cart: cartReducer
 });

@@ -6,10 +6,6 @@ import PropTypes from 'prop-types';
 import { getCategories } from '../../redux/actions/categories';
 
 class Categories extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const brand = this.props.match.params.brand;
     this.props.getCategories(brand);

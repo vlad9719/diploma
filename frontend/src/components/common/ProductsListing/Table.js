@@ -13,7 +13,9 @@ export default function ProductsTable(props) {
 
     if (props.isAuthenticated) {
       row['Добавление в корзину'] = (
-        <button className="btn btn-outline-primary col-sm-12">
+        <button
+          className="btn btn-outline-primary col-sm-12"
+          onClick={() => props.onAddToCartButtonClick(product)}>
           Добавить в корзину
         </button>
       );
@@ -79,5 +81,6 @@ ProductsTable.propTypes = {
   products: PropTypes.array,
   category: PropTypes.string,
   isAuthenticated: PropTypes.bool,
-  tableName: PropTypes.string
+  tableName: PropTypes.string,
+  onAddToCartButtonClick: PropTypes.func
 };
