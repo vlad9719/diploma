@@ -1,6 +1,8 @@
 import React from 'react';
-import './index.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+import './index.css';
 
 export default function Table(props) {
   return (
@@ -10,13 +12,13 @@ export default function Table(props) {
         {props.categories.map(category => {
           return (
             <div className="border col-sm-12 col-md-6 col-12 col-lg-4 ml-0" key={category.id}>
-              <a
-                href={`../products/${category.name}`}
+              <Link
+                to={`../products/${category.name}`}
                 className="d-flex justify-content-center align-items-center">
                 <span className="category-link text-center">
                   {`${category.id}. ${category.name}`}
                 </span>
-              </a>
+              </Link>
             </div>
           );
         })}
@@ -27,5 +29,5 @@ export default function Table(props) {
 
 Table.propTypes = {
   brand: PropTypes.string,
-  category: PropTypes.object
+  categories: PropTypes.array
 };

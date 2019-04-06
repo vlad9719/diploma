@@ -17,12 +17,13 @@ export const getProducts = category => {
   };
 };
 
-export const search = (name) => {
+export const search = (history, name) => {
   return dispatch => {
     return request('GET', `api/search?name=${name}`)
       .then(response => {
         const products = [...response.data.products];
         dispatch(setProducts(products));
+        history.push(`/search/${name}`);
       })
       .catch(err => {
         dispatch({

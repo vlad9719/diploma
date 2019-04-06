@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions/user';
 import { withRouter } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { search } from '../redux/actions/products';
 
 class Navbar extends Component {
   constructor(props) {
@@ -23,8 +24,9 @@ class Navbar extends Component {
   }
 
   onLogout = () => this.props.logoutUser(this.props.history);
-  onSearch = () => {
-    this.props.history.push(`/search/${this.state.searchString}`);
+  onSearch = (event) => {
+    this.props.search(this.props.history, this.state.searchString);
+    event.preventDefault();
   };
 
   render() {
@@ -32,16 +34,15 @@ class Navbar extends Component {
     let authLinks = (
       <ul className="navbar-nav ml-lg-5">
         <li className="nav-item dropdown">
-          <a
+          <div
             className="nav-link dropdown-toggle active"
-            href="#"
             id="navbarDropdown"
             role="button"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false">
             {userInfo.name}
-          </a>
+          </div>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
             <Link className="dropdown-item" to="/profile">
               Мой профиль
@@ -131,6 +132,7 @@ Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   history: PropTypes.object,
+  search: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -138,7 +140,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  logoutUser
+  logoutUser,
+  search
 };
 
 export default connect(

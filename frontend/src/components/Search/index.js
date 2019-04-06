@@ -9,17 +9,13 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
-      queryString: this.props.match.params.query || ''
+      isLoading: true
     };
   }
 
   componentDidMount() {
-    const query = this.state.queryString;
-    this.props.search(query).then(() => {
-      this.setState({
-        isLoading: false
-      });
+    this.setState({
+      isLoading: false
     });
   }
 
@@ -30,7 +26,9 @@ class Search extends React.Component {
           <ProductsListing
             products={this.props.products.items}
             isAuthenticated={this.props.user.isAuthenticated}
-            tableName={`Результаты поиска по запросу "${this.state.queryString}"`}
+            tableName={`Результаты поиска по запросу "${
+              this.props.match.params.query
+            }"`}
           />
         </div>
       );
@@ -39,7 +37,7 @@ class Search extends React.Component {
     if (!this.state.isLoading) {
       return (
         <h3 className="text-center mt-5">
-          Ничего не найдено по запросу "{this.state.queryString}"
+          Ничего не найдено по запросу "{this.props.match.params.query}"
         </h3>
       );
     }
@@ -66,5 +64,6 @@ Search.propTypes = {
   products: PropTypes.object,
   search: PropTypes.func,
   match: PropTypes.object,
-  user: PropTypes.object
+  user: PropTypes.object,
+  history: PropTypes.object
 };
