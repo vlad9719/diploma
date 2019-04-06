@@ -1,37 +1,54 @@
-import { ADD_TO_CART } from '../actions/types';
+import {
+  ADD_TO_CART,
+  CHANGE_ITEM_QUANTITY,
+  REMOVE_ITEM_FROM_CART,
+  CLEAR_CART,
+  ORDER_SAVED
+} from '../actions/types';
 
 const initialState = {
-  items: []
+  items: [],
+  orderSaved: false
 };
 
 export default function(state = initialState, action) {
-  let product;
   switch (action.type) {
     case ADD_TO_CART:
-      product = state.items.find(item => {
-        return item.id === action.payload.id;
-      });
-
-      if (product) {
-        const newItems = state.items.map(item => {
-          if (product.id === item.id) {
+      return {
+        ...state,
+        items: [...state.items, { ...action.payload, quantity: 1 }],
+        orderSaved: false
+      };
+    case CHANGE_ITEM_QUANTITY:
+      return {
+        ...state,
+        items: state.items.map(item => {
+          if (action.payload.id === item.id) {
             return {
               ...item,
-              quantity: item.quantity + 1
+              quantity: action.payload.quantity
             };
           }
 
           return item;
-        });
-
-        return {
-          ...state,
-          items: newItems
-        };
-      }
+        })
+      };
+    case REMOVE_ITEM_FROM_CART:
       return {
         ...state,
-        items: [...state.items, { ...action.payload, quantity: 1 }]
+        items: state.items.filter(item => {
+          return item.id !== action.payload;
+        })
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        items: initialState.items
+      };
+    case ORDER_SAVED:
+      return {
+        ...state,
+        orderSaved: true
       };
     default:
       return state;

@@ -12,6 +12,7 @@ import Brands from 'components/Brands';
 import Categories from 'components/Categories';
 import Products from 'components/Products';
 import Search from 'components/Search';
+import Cart from 'components/Cart';
 
 import Home from 'components/Home';
 import Layout from 'components/Layout';
@@ -39,6 +40,7 @@ class App extends Component {
             <Route exact path="/categories/:brand" component={Categories} />
             <Route exact path="/products/:category" component={Products} />
             <Route exact path="/search/:query" component={Search} />
+            <Route exact path="/cart" component={Cart} />
           </Layout>
         </Router>
       </Provider>

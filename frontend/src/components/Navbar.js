@@ -33,7 +33,7 @@ class Navbar extends Component {
     let { isAuthenticated, userInfo } = this.props.user;
     let authLinks = (
       <ul className="navbar-nav ml-lg-5">
-        <li className="nav-item dropdown">
+        <li className="nav-item dropdown cursor-pointer">
           <div
             className="nav-link dropdown-toggle active"
             id="navbarDropdown"
@@ -47,11 +47,14 @@ class Navbar extends Component {
             <Link className="dropdown-item" to="/profile">
               Мой профиль
             </Link>
-            <Link to="/" className="dropdown-item">
+            <Link to="/orders" className="dropdown-item">
               Мои заказы
             </Link>
           </div>
         </li>
+        <Link to="/cart" className="nav-link active">
+          Корзина ({this.props.cart.items.length})
+        </Link>
         <Link to="/" className="nav-link active" onClick={this.onLogout}>
           Выход
         </Link>
@@ -128,15 +131,9 @@ class Navbar extends Component {
   }
 }
 
-Navbar.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  history: PropTypes.object,
-  search: PropTypes.func
-};
-
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  cart: state.cart
 });
 
 const mapDispatchToProps = {
@@ -148,3 +145,11 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(Navbar));
+
+Navbar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  history: PropTypes.object,
+  search: PropTypes.func,
+  cart: PropTypes.object
+};

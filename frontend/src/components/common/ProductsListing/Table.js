@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MDBDataTable } from 'mdbreact';
+import CartButton from './CartButton';
 import './index.css';
 
 export default function ProductsTable(props) {
@@ -13,11 +14,11 @@ export default function ProductsTable(props) {
 
     if (props.isAuthenticated) {
       row['Добавление в корзину'] = (
-        <button
-          className="btn btn-outline-primary col-sm-12"
-          onClick={() => props.onAddToCartButtonClick(product)}>
-          Добавить в корзину
-        </button>
+        <CartButton
+          onAddToCartButtonClick={props.onAddToCartButtonClick}
+          productIsInTheCart={props.productIsInTheCart}
+          product={product}
+        />
       );
     }
 
@@ -82,5 +83,6 @@ ProductsTable.propTypes = {
   category: PropTypes.string,
   isAuthenticated: PropTypes.bool,
   tableName: PropTypes.string,
-  onAddToCartButtonClick: PropTypes.func
+  onAddToCartButtonClick: PropTypes.func,
+  productIsInTheCart: PropTypes.func
 };

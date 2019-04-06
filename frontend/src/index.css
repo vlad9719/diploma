@@ -19,3 +19,7 @@ footer {
   height: 70px;
   width: 100%;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}

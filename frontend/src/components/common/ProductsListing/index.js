@@ -8,10 +8,17 @@ class ProductsListing extends React.Component {
   constructor(props) {
     super(props);
     this.onAddToCartButtonClick = this.onAddToCartButtonClick.bind(this);
+    this.productIsInTheCart = this.productIsInTheCart.bind(this);
   }
 
   onAddToCartButtonClick(product) {
     this.props.addToCart(product);
+  }
+
+  productIsInTheCart(product) {
+    return this.props.cart.items.some(item => {
+      return item.id === product.id;
+    });
   }
 
   render() {
@@ -19,10 +26,12 @@ class ProductsListing extends React.Component {
       <Table
         {...this.props}
         onAddToCartButtonClick={this.onAddToCartButtonClick}
+        productIsInTheCart={this.productIsInTheCart}
       />
     );
   }
 }
+
 const mapStateToProps = state => ({
   cart: state.cart
 });
