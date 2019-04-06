@@ -18,8 +18,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
-        userInfo: action.payload,
-        loader: false
+        userInfo: action.payload
       };
     case UPDATE_CURRENT_USER:
       return {
