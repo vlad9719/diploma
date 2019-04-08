@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MDBDataTable } from 'mdbreact';
 
-export default function Items(props) {
+export default function AdminItems(props) {
   const rows = props.items.map(item => {
     return {
       name: item.name,
@@ -59,7 +59,7 @@ export default function Items(props) {
   );
 }
 
-Items.propTypes = {
+AdminItems.propTypes = {
   items: PropTypes.array,
   tableName: PropTypes.string
 };

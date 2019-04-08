@@ -54,6 +54,87 @@ export const getOneUserOrders = userId => {
   };
 };
 
+export const updateOrderDeliveryStatus = (orderId, status) => {
+  return dispatch => {
+    return request('PUT', `api/admin/order`, {
+      id: orderId,
+      delivery_status: status
+    })
+      .then(() => {
+        return request('GET', `api/admin/orders`).then(response => {
+          const orders = [...response.data.orders];
+          dispatch(setAllOrders(orders));
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ERROR,
+          payload: err.response.error
+        });
+      });
+  };
+};
+
+export const updateOrderPaymentStatus = (orderId, status) => {
+  return dispatch => {
+    return request('PUT', `api/admin/order`, {
+      id: orderId,
+      payment_status: status
+    })
+      .then(() => {
+        return request('GET', `api/admin/orders`).then(response => {
+          const orders = [...response.data.orders];
+          dispatch(setAllOrders(orders));
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ERROR,
+          payload: err.response.error
+        });
+      });
+  };
+};
+
+export const setPrice = (orderId, price) => {
+  return dispatch => {
+    return request('PUT', `api/admin/order`, {
+      id: orderId,
+      price
+    })
+      .then(() => {
+        return request('GET', `api/admin/orders`).then(response => {
+          const orders = [...response.data.orders];
+          dispatch(setAllOrders(orders));
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ERROR,
+          payload: err.response.error
+        });
+      });
+  };
+};
+
+export const deleteOrder = (orderId) => {
+  return dispatch => {
+    return request('DELETE', `api/order/${orderId}`)
+      .then(() => {
+        return request('GET', `api/admin/orders`).then(response => {
+          const orders = [...response.data.orders];
+          dispatch(setAllOrders(orders));
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ERROR,
+          payload: err.response.error
+        });
+      });
+  };
+};
+
 export const setAllOrders = orders => {
   return {
     type: SET_ALL_ORDERS,

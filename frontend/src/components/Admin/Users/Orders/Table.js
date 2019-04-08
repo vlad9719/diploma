@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Items from './Items';
+import AdminItems from '../../../common/AdminItems';
 
 export default function Table(props) {
   return (
@@ -12,6 +12,7 @@ export default function Table(props) {
             return orderA.orderDetails.id < orderB.orderDetails.id;
           })
           .map(order => {
+            const orderId = order.orderDetails.id;
             return (
               <tbody key={order.orderDetails.id} className="border-dark">
                 <tr>
@@ -36,7 +37,9 @@ export default function Table(props) {
                   <td className="border">
                     {order.orderDetails.delivery_status}
                   </td>
-                  <th colSpan={3} className="d-flex justify-content-end">
+                  <th
+                    colSpan={3}
+                    className="d-flex justify-content-between border">
                     <button
                       className="btn btn-primary collapsed text-center"
                       type="button"
@@ -44,13 +47,25 @@ export default function Table(props) {
                       data-target={`#order${order.orderDetails.id}`}
                       aria-expanded="false"
                       aria-controls={`order${order.orderDetails.id}`}>
-                      Просмотр
+                      Просмотреть
+                    </button>
+                    <button
+                      className="btn btn-outline-success text-center"
+                      type="button"
+                      onClick={() => props.onEditOrderButtonClick(orderId)}>
+                      Редактировать
+                    </button>
+                    <button
+                      className="btn btn-outline-danger text-center"
+                      type="button"
+                      onClick={() => props.deleteOrder(orderId)}>
+                      Удалить
                     </button>
                   </th>
                 </tr>
                 <tr className="collapse" id={`order${order.orderDetails.id}`}>
                   <td colSpan={7}>
-                    <Items
+                    <AdminItems
                       items={order.orderedItems}
                       tableName={'Заказанные товары'}
                     />{' '}
@@ -67,5 +82,7 @@ export default function Table(props) {
 Table.propTypes = {
   orders: PropTypes.array,
   users: PropTypes.array,
-  tableName: PropTypes.string
+  tableName: PropTypes.string,
+  onEditOrderButtonClick: PropTypes.func,
+  deleteOrder: PropTypes.func
 };

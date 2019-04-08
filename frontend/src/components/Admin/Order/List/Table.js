@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Items from './Items';
+import AdminItems from '../../../common/AdminItems';
 
 export default function Table(props) {
   return (
@@ -14,8 +14,9 @@ export default function Table(props) {
           })
           .map(order => {
             const userId = order.orderDetails.user_id;
+            const orderId = order.orderDetails.id;
             return (
-              <tbody key={order.orderDetails.id} className="border-dark">
+              <tbody key={orderId} className="border-dark">
                 <tr>
                   <th>ID заказа</th>
                   <th>Клиент</th>
@@ -27,8 +28,8 @@ export default function Table(props) {
                     Действия с заказом
                   </th>
                 </tr>
-                <tr key={order.orderDetails.id} colSpan={0}>
-                  <td className="border">{order.orderDetails.id}</td>
+                <tr key={orderId} colSpan={0}>
+                  <td className="border">{orderId}</td>
                   <td className="border">
                     <Link to={`orders/${userId}`}>
                       {
@@ -48,21 +49,33 @@ export default function Table(props) {
                   <td className="border">
                     {order.orderDetails.delivery_status}
                   </td>
-                  <th colSpan={3} className="d-flex justify-content-end">
+                  <th colSpan={3} className="d-flex justify-content-between">
                     <button
-                      className="btn btn-primary collapsed text-center"
+                      className="btn btn-outline-primary collapsed text-center"
                       type="button"
                       data-toggle="collapse"
-                      data-target={`#order${order.orderDetails.id}`}
+                      data-target={`#order${orderId}`}
                       aria-expanded="false"
-                      aria-controls={`order${order.orderDetails.id}`}>
-                      Просмотр
+                      aria-controls={`order${orderId}`}>
+                      Просмотреть
+                    </button>
+                    <button
+                      className="btn btn-outline-success text-center"
+                      type="button"
+                      onClick={() => props.onEditOrderButtonClick(orderId)}>
+                      Редактировать
+                    </button>
+                    <button
+                      className="btn btn-outline-danger text-center"
+                      type="button"
+                      onClick={() => props.deleteOrder(orderId)}>
+                      Удалить
                     </button>
                   </th>
                 </tr>
-                <tr className="collapse" id={`order${order.orderDetails.id}`}>
+                <tr className="collapse" id={`order${orderId}`}>
                   <td colSpan={7}>
-                    <Items
+                    <AdminItems
                       items={order.orderedItems}
                       tableName={'Заказанные товары'}
                     />{' '}
@@ -79,5 +92,7 @@ export default function Table(props) {
 Table.propTypes = {
   orders: PropTypes.array,
   users: PropTypes.array,
-  tableName: PropTypes.string
+  tableName: PropTypes.string,
+  onEditOrderButtonClick: PropTypes.func,
+  deleteOrder: PropTypes.func
 };

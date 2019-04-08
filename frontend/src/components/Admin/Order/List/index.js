@@ -3,13 +3,22 @@ import Table from './Table';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getAllOrders, getAllUsers } from '../../../../redux/actions/admin';
+import { getAllOrders, getAllUsers, deleteOrder } from '../../../../redux/actions/admin';
 
 class AdminOrders extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onEditOrderButtonClick = this.onEditOrderButtonClick.bind(this);
+  }
+
   componentDidMount() {
     this.props.getAllUsers().then(() => {
       this.props.getAllOrders();
     });
+  }
+
+  onEditOrderButtonClick(orderId) {
+    this.props.history.push(`/admin/order/${orderId}`);
   }
 
   render() {
@@ -18,6 +27,8 @@ class AdminOrders extends React.Component {
         <Table
           orders={this.props.admin.orders}
           users={this.props.admin.users}
+          onEditOrderButtonClick={this.onEditOrderButtonClick}
+          deleteOrder={this.props.deleteOrder}
           tableName="Все заказы"
         />
       );
@@ -33,7 +44,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getAllOrders,
-  getAllUsers
+  getAllUsers,
+  deleteOrder
 };
 
 export default connect(
@@ -44,5 +56,7 @@ export default connect(
 AdminOrders.propTypes = {
   admin: PropTypes.object,
   getAllOrders: PropTypes.func,
-  getAllUsers: PropTypes.func
+  getAllUsers: PropTypes.func,
+  deleteOrder: PropTypes.func,
+  history: PropTypes.array
 };

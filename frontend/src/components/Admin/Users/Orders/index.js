@@ -3,7 +3,11 @@ import Table from './Table';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getAllUsers, getOneUserOrders } from '../../../../redux/actions/admin';
+import {
+  getAllUsers,
+  getOneUserOrders,
+  deleteOrder
+} from '../../../../redux/actions/admin';
 
 class AdminOrdersByUser extends React.Component {
   constructor(props) {
@@ -11,6 +15,11 @@ class AdminOrdersByUser extends React.Component {
     this.state = {
       isLoading: true
     };
+    this.onEditOrderButtonClick = this.onEditOrderButtonClick.bind(this);
+  }
+
+  onEditOrderButtonClick(orderId) {
+    this.props.history.push(`/admin/order/${orderId}`);
   }
 
   componentDidMount() {
@@ -37,6 +46,8 @@ class AdminOrdersByUser extends React.Component {
           orders={this.props.admin.userOrders}
           tableName={`Заказы пользователя ${userName}`}
           users={this.props.admin.users}
+          deleteOrder={this.props.deleteOrder}
+          onEditOrderButtonClick={this.onEditOrderButtonClick}
         />
       );
     }
@@ -57,7 +68,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getAllUsers,
-  getOneUserOrders
+  getOneUserOrders,
+  deleteOrder
 };
 
 export default connect(
@@ -69,7 +81,11 @@ AdminOrdersByUser.propTypes = {
   admin: PropTypes.object,
   getOneUserOrders: PropTypes.func,
   getAllUsers: PropTypes.func,
+  deleteOrder: PropTypes.func,
   match: PropTypes.object,
   user: PropTypes.object,
-  users: PropTypes.array
+  history: PropTypes.object,
+  users: PropTypes.array,
+  updateOrderPaymentStatus: PropTypes.func,
+  updateOrderDeliveryStatus: PropTypes.func
 };
