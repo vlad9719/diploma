@@ -16,6 +16,7 @@ import Cart from 'components/Cart';
 import Orders from 'components/Orders';
 import AdminOrders from 'components/Admin/Order/List';
 import AdminUsers from 'components/Admin/Users';
+import AdminOrdersByUser from 'components/Admin/Users/Orders';
 
 import Home from 'components/Home';
 import Layout from 'components/Layout';
@@ -47,6 +48,11 @@ class App extends Component {
             <Route exact path="/orders" component={Orders} />
             <Route exact path="/admin/orders" component={AdminOrders} />
             <Route exact path="/admin/users" component={AdminUsers} />
+            <Route
+              exact
+              path="/admin/orders/:id"
+              component={AdminOrdersByUser}
+            />
           </Layout>
         </Router>
       </Provider>

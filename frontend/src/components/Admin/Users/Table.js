@@ -13,7 +13,7 @@ export default function Table(props) {
       created_at,
       view_orders: (
         <div className="d-flex justify-content-center">
-          <button className="btn btn-outline-primary col-sm-10">
+          <button className="btn btn-outline-primary col-sm-10" onClick={() => props.onViewUserOrdersButtonClick(id)}>
             Просмотреть заказы
           </button>
         </div>
@@ -85,5 +85,6 @@ export default function Table(props) {
 
 Table.propTypes = {
   users: PropTypes.array,
-  tableName: PropTypes.string
+  tableName: PropTypes.string,
+  onViewUserOrdersButtonClick: PropTypes.func
 };

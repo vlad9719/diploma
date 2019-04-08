@@ -8,12 +8,23 @@ import { getAllUsers } from '../../../redux/actions/admin';
 class AdminUsers extends React.Component {
   componentDidMount() {
     this.props.getAllUsers();
+    this.onViewUserOrdersButtonClick = this.onViewUserOrdersButtonClick.bind(
+      this
+    );
+  }
+
+  onViewUserOrdersButtonClick(userId) {
+    this.props.history.push(`orders/${userId}`);
   }
 
   render() {
     if (this.props.admin.users.length) {
       return (
-        <Table users={this.props.admin.users} tableName="Все пользователи" />
+        <Table
+          users={this.props.admin.users}
+          tableName="Все пользователи"
+          onViewUserOrdersButtonClick={this.onViewUserOrdersButtonClick}
+        />
       );
     }
 
@@ -36,5 +47,6 @@ export default connect(
 
 AdminUsers.propTypes = {
   admin: PropTypes.object,
-  getAllUsers: PropTypes.func
+  getAllUsers: PropTypes.func,
+  history: PropTypes.array
 };

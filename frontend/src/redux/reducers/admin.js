@@ -1,8 +1,9 @@
-import { SET_ALL_ORDERS, SET_ALL_USERS } from '../actions/types';
+import { SET_ALL_ORDERS, SET_ALL_USERS, SET_ONE_USER_ORDERS } from '../actions/types';
 
 const initialState = {
   orders: [],
-  users: []
+  users: [],
+  userOrders: []
 };
 
 export default function(state = initialState, action) {
@@ -16,6 +17,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         users: action.payload
+      };
+    case SET_ONE_USER_ORDERS:
+      return {
+        ...state,
+        userOrders: action.payload
       };
     default:
       return state;

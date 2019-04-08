@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Items from './Items';
 
 export default function Table(props) {
@@ -13,12 +12,10 @@ export default function Table(props) {
             return orderA.orderDetails.id < orderB.orderDetails.id;
           })
           .map(order => {
-            const userId = order.orderDetails.user_id;
             return (
               <tbody key={order.orderDetails.id} className="border-dark">
                 <tr>
                   <th>ID заказа</th>
-                  <th>Клиент</th>
                   <th>Дата создания</th>
                   <th>Цена, BYN</th>
                   <th>Статус оплаты</th>
@@ -29,15 +26,6 @@ export default function Table(props) {
                 </tr>
                 <tr key={order.orderDetails.id} colSpan={0}>
                   <td className="border">{order.orderDetails.id}</td>
-                  <td className="border">
-                    <Link to={`orders/${userId}`}>
-                      {
-                        props.users.find(user => {
-                          return userId === user.id;
-                        }).name
-                      }
-                    </Link>
-                  </td>
                   <td className="border">{order.orderDetails.created_at}</td>
                   <td className="border">
                     {order.orderDetails.price || 'Не выставлена'}
