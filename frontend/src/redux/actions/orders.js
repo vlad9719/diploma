@@ -17,6 +17,34 @@ export const getCurrentUserOrders = id => {
   };
 };
 
+export const reportPayment = orderId => {
+  return dispatch => {
+    return request('PUT', 'api/order', {
+      id: orderId,
+      payment_status: 'Оплата произведена'
+    }).catch(err => {
+      dispatch({
+        type: ERROR,
+        payload: err.response.error
+      });
+    });
+  };
+};
+
+export const reportReception = orderId => {
+  return dispatch => {
+    return request('PUT', 'api/order', {
+      id: orderId,
+      delivery_status: 'Получен'
+    }).catch(err => {
+      dispatch({
+        type: ERROR,
+        payload: err.response.error
+      });
+    });
+  };
+};
+
 export const setCurrentUserOrders = orders => {
   return {
     type: SET_CURRENT_USER_ORDERS,
