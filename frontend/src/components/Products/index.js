@@ -19,6 +19,7 @@ class Products extends React.Component {
             products={this.props.products.items}
             tableName={`Запчасти группы "${this.props.match.params.category}"`}
             isAuthenticated={this.props.user.isAuthenticated}
+            isAdmin={this.props.user.userInfo.isAdmin}
           />
         </div>
       );
@@ -30,7 +31,7 @@ class Products extends React.Component {
 
 const mapStateToProps = state => ({
   products: state.products,
-  user: state.user,
+  user: state.user
 });
 
 const mapDispatchToProps = {

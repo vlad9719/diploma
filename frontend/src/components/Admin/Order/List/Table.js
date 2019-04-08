@@ -16,6 +16,7 @@ export default function Table(props) {
               <tbody key={order.orderDetails.id} className="border-dark">
                 <tr>
                   <th>ID заказа</th>
+                  <th>ID пользователя</th>
                   <th>Дата создания</th>
                   <th>Цена, BYN</th>
                   <th>Статус оплаты</th>
@@ -26,6 +27,7 @@ export default function Table(props) {
                 </tr>
                 <tr key={order.orderDetails.id} colSpan={0}>
                   <td className="border">{order.orderDetails.id}</td>
+                  <td className="border">{order.orderDetails.user_id}</td>
                   <td className="border">{order.orderDetails.created_at}</td>
                   <td className="border">
                     {order.orderDetails.price || 'Не выставлена'}
@@ -82,8 +84,6 @@ export default function Table(props) {
                     <Items
                       items={order.orderedItems}
                       tableName={'Заказанные товары'}
-                      orderId={order.orderDetails.id}
-                      onRepeatOrderButtonClick={props.onRepeatOrderButtonClick}
                     />{' '}
                   </td>
                 </tr>
@@ -99,6 +99,5 @@ Table.propTypes = {
   orders: PropTypes.array,
   onReportPaymentButtonClick: PropTypes.func,
   onReportReceptionButtonClick: PropTypes.func,
-  onRepeatOrderButtonClick: PropTypes.func,
   tableName: PropTypes.string
 };

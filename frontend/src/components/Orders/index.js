@@ -8,6 +8,7 @@ import {
   reportPayment,
   reportReception
 } from '../../redux/actions/orders';
+import { fillCart } from '../../redux/actions/cart';
 import { me } from '../../redux/actions/user';
 
 class Orders extends React.Component {
@@ -19,6 +20,7 @@ class Orders extends React.Component {
     this.onReportReceptionButtonClick = this.onReportReceptionButtonClick.bind(
       this
     );
+    this.onRepeatOrderButtonClick = this.onRepeatOrderButtonClick.bind(this);
   }
 
   updateOrders() {
@@ -44,6 +46,13 @@ class Orders extends React.Component {
     });
   }
 
+  onRepeatOrderButtonClick(orderId) {
+    const order = this.props.orders.items.find(
+      order => order.orderDetails.id === orderId
+    );
+    this.props.fillCart(order.orderedItems, this.props.history);
+  }
+
   render() {
     if (!this.props.user.userInfo.id) {
       return null;
@@ -53,7 +62,8 @@ class Orders extends React.Component {
         orders={this.props.orders.items}
         onReportPaymentButtonClick={this.onReportPaymentButtonClick}
         onReportReceptionButtonClick={this.onReportReceptionButtonClick}
-        tableName="Ваши заказы"
+        onRepeatOrderButtonClick={this.onRepeatOrderButtonClick}
+        tableName="Мои заказы"
       />
     );
   }
@@ -61,13 +71,15 @@ class Orders extends React.Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  orders: state.orders
+  orders: state.orders,
+  cart: state.cart
 });
 
 const mapDispatchToProps = {
   getCurrentUserOrders,
   reportPayment,
   reportReception,
+  fillCart,
   me
 };
 
@@ -81,6 +93,8 @@ Orders.propTypes = {
   getCurrentUserOrders: PropTypes.func,
   reportPayment: PropTypes.func,
   reportReception: PropTypes.func,
+  fillCart: PropTypes.func,
   me: PropTypes.func,
-  orders: PropTypes.object
+  orders: PropTypes.object,
+  history: PropTypes.array
 };

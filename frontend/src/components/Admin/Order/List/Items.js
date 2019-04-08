@@ -35,7 +35,7 @@ export default function Items(props) {
       label: 'Количество',
       field: 'quantity',
       sort: 'asc'
-    }
+    },
   ];
 
   const tableData = {
@@ -55,20 +55,11 @@ export default function Items(props) {
         paging={false}
         responsiveXl={true}
       />
-      <div className="d-flex justify-content-end">
-        <button
-          className="btn btn-primary"
-          onClick={() => props.onRepeatOrderButtonClick(props.orderId)}>
-          Повторить заказ
-        </button>
-      </div>
     </div>
   );
 }
 
 Items.propTypes = {
   items: PropTypes.array,
-  tableName: PropTypes.string,
-  onRepeatOrderButtonClick: PropTypes.func,
-  orderId: PropTypes.number
+  tableName: PropTypes.string
 };

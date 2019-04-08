@@ -7,6 +7,7 @@ import categoriesReducer from './categories';
 import productsReducer from './products';
 import cartReducer from './cart';
 import ordersReducer from './orders';
+import adminReducer from './admin';
 
 export default combineReducers({
   common: commonReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   categories: categoriesReducer,
   products: productsReducer,
   cart: cartReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
+  admin: adminReducer
 });

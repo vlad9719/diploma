@@ -7,7 +7,8 @@ export default function Form(props) {
   return (
     <form
       className="mt-5 mb-5 offset-sm-2 offset-md-3 offset-lg-4 col-sm-8 col-md-6 col-lg-4 border"
-      onChange={props.handleChange}>
+      onChange={props.handleChange}
+      onSubmit={props.handleSubmit}>
       <h3 className="text-center mt-3 mb-3">Вход на сайт</h3>
       <div className="form-group">
         <label htmlFor="email">Ваш E-mail:</label>
@@ -36,7 +37,7 @@ export default function Form(props) {
         </div>
       )}
       <button
-        type="button"
+        type="submit"
         className="btn btn-outline-primary col-sm-12 mb-3"
         onClick={props.handleSubmit}>
         Войти на сайт

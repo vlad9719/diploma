@@ -31,7 +31,8 @@ class Register extends React.Component {
     });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
     this.props.unsetErrors();
     this.props.login(this.props.history, this.state.userData);
   }

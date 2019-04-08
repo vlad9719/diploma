@@ -1,6 +1,7 @@
 import {
   ADD_TO_CART,
   CHANGE_ITEM_QUANTITY,
+  FILL_CART,
   REMOVE_ITEM_FROM_CART,
   CLEAR_CART,
   ORDER_SAVED,
@@ -17,6 +18,13 @@ export const addToCart = product => {
 export const changeItemQuantity = (id, quantity) => {
   return dispatch => {
     dispatch(changeItemQuantityActionCreator(id, quantity));
+  };
+};
+
+export const fillCart = (order, history) => {
+  return dispatch => {
+    dispatch(fillCartActionCreator(order));
+    history.push('/cart');
   };
 };
 
@@ -62,6 +70,13 @@ export const changeItemQuantityActionCreator = (id, quantity) => {
       id,
       quantity
     }
+  };
+};
+
+export const fillCartActionCreator = order => {
+  return {
+    type: FILL_CART,
+    payload: order
   };
 };
 

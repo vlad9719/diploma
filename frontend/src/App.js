@@ -14,6 +14,7 @@ import Products from 'components/Products';
 import Search from 'components/Search';
 import Cart from 'components/Cart';
 import Orders from 'components/Orders';
+import AdminOrders from 'components/Admin/Order/List';
 
 import Home from 'components/Home';
 import Layout from 'components/Layout';
@@ -43,6 +44,7 @@ class App extends Component {
             <Route exact path="/search/:query" component={Search} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/orders" component={Orders} />
+            <Route exact path="/admin/orders" component={AdminOrders} />
           </Layout>
         </Router>
       </Provider>

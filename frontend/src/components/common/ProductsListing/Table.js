@@ -12,7 +12,7 @@ export default function ProductsTable(props) {
       order_code: product.order_code
     };
 
-    if (props.isAuthenticated) {
+    if (props.isAuthenticated && !props.isAdmin) {
       row['Добавление в корзину'] = (
         <CartButton
           onAddToCartButtonClick={props.onAddToCartButtonClick}
@@ -46,7 +46,7 @@ export default function ProductsTable(props) {
     }
   ];
 
-  if (props.isAuthenticated) {
+  if (props.isAuthenticated && !props.isAdmin) {
     columns.push({
       label: 'Добавление в корзину',
       field: 'Добавление в корзину',
@@ -82,6 +82,7 @@ ProductsTable.propTypes = {
   products: PropTypes.array,
   category: PropTypes.string,
   isAuthenticated: PropTypes.bool,
+  isAdmin: PropTypes.bool,
   tableName: PropTypes.string,
   onAddToCartButtonClick: PropTypes.func,
   productIsInTheCart: PropTypes.func

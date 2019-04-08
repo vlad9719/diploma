@@ -26,6 +26,7 @@ class Search extends React.Component {
           <ProductsListing
             products={this.props.products.items}
             isAuthenticated={this.props.user.isAuthenticated}
+            isAdmin={this.props.user.userInfo.isAdmin}
             tableName={`Результаты поиска по запросу "${
               this.props.match.params.query
             }"`}

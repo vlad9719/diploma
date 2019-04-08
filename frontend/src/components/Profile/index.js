@@ -15,10 +15,17 @@ class Profile extends React.Component {
     this.handleEditButtonClick = this.handleEditButtonClick.bind(this);
     this.handleSaveButtonClick = this.handleSaveButtonClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleViewOrdersButtonClick = this.handleViewOrdersButtonClick.bind(
+      this
+    );
   }
 
   handleEditButtonClick() {
     this.props.setUpdatingUserStatus(true);
+  }
+
+  handleViewOrdersButtonClick() {
+    this.props.history.push('/orders');
   }
 
   handleChange(event) {
@@ -51,6 +58,7 @@ class Profile extends React.Component {
         handleEditButtonClick={this.handleEditButtonClick}
         handleChange={this.handleChange}
         handleSaveButtonClick={this.handleSaveButtonClick}
+        handleViewOrdersButtonClick={this.handleViewOrdersButtonClick}
         errors={this.props.errors.update}
       />
     );
@@ -78,5 +86,6 @@ Profile.propTypes = {
   errors: PropTypes.object,
   unsetErrors: PropTypes.func,
   update: PropTypes.func,
-  setUpdatingUserStatus: PropTypes.func
+  setUpdatingUserStatus: PropTypes.func,
+  history: PropTypes.object
 };

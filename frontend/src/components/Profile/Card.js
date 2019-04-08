@@ -3,7 +3,7 @@ import UpdateForm from './UpdateForm';
 import PropTypes from 'prop-types';
 
 export default function Card(props) {
-  const { name, email, organization, phone } = props.userInfo;
+  const { name, email, organization, phone, isAdmin } = props.userInfo;
   return (
     <div>
       <h3 className="text-center mt-5">Мой профиль</h3>
@@ -30,11 +30,14 @@ export default function Card(props) {
           onClick={props.handleEditButtonClick}>
           Редактировать профиль
         </button>
-        <button
-          type="button"
-          className="btn btn-outline-secondary offset-md-2 col-md-8 mb-3">
-          Просмотреть мои заказы
-        </button>
+        {!isAdmin && (
+          <button
+            type="button"
+            className="btn btn-outline-secondary offset-md-2 col-md-8 mb-3"
+            onClick={props.handleViewOrdersButtonClick}>
+            Просмотреть мои заказы
+          </button>
+        )}
       </div>
       {props.isUpdating && (
         <UpdateForm
@@ -51,6 +54,7 @@ Card.propTypes = {
   isUpdating: PropTypes.bool,
   handleEditButtonClick: PropTypes.func,
   handleSaveButtonClick: PropTypes.func,
+  handleViewOrdersButtonClick: PropTypes.func,
   handleChange: PropTypes.func,
   errors: PropTypes.object,
   userInfo: PropTypes.object

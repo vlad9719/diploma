@@ -24,13 +24,14 @@ class Navbar extends Component {
   }
 
   onLogout = () => this.props.logoutUser(this.props.history);
-  onSearch = (event) => {
+  onSearch = event => {
     this.props.search(this.props.history, this.state.searchString);
     event.preventDefault();
   };
 
   render() {
     let { isAuthenticated, userInfo } = this.props.user;
+    let { isAdmin } = userInfo;
     let authLinks = (
       <ul className="navbar-nav ml-lg-5">
         <li className="nav-item dropdown cursor-pointer">
@@ -76,6 +77,33 @@ class Navbar extends Component {
       </ul>
     );
 
+    let adminLinks = (
+      <ul className="navbar-nav ml-lg-5">
+        <li className="nav-item dropdown cursor-pointer">
+          <div
+            className="nav-link dropdown-toggle active"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+            {userInfo.name} (admin)
+          </div>
+          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <Link to="/admin/orders" className="dropdown-item">
+              Заказы
+            </Link>
+            <Link className="dropdown-item" to="/profile">
+              Мой профиль
+            </Link>
+          </div>
+        </li>
+        <Link to="/" className="nav-link active" onClick={this.onLogout}>
+          Выход
+        </Link>
+      </ul>
+    );
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
@@ -109,7 +137,7 @@ class Navbar extends Component {
             Телефон:
             <a href="tel:8 (017)-380-23-72">8 (017)-380-23-72</a>
           </div>
-          {isAuthenticated ? authLinks : guestLinks}
+          {isAuthenticated ? (isAdmin ? adminLinks : authLinks) : guestLinks}
           <form className="form-inline my-2 my-lg-0">
             <input
               className="form-control mr-sm-3"

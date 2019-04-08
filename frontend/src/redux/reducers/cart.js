@@ -1,6 +1,7 @@
 import {
   ADD_TO_CART,
   CHANGE_ITEM_QUANTITY,
+  FILL_CART,
   REMOVE_ITEM_FROM_CART,
   CLEAR_CART,
   ORDER_SAVED
@@ -32,6 +33,11 @@ export default function(state = initialState, action) {
 
           return item;
         })
+      };
+    case FILL_CART:
+      return {
+        ...state,
+        items: action.payload
       };
     case REMOVE_ITEM_FROM_CART:
       return {
