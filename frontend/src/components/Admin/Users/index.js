@@ -3,23 +3,17 @@ import Table from './Table';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getAllOrders, getAllUsers } from '../../../../redux/actions/admin';
+import { getAllUsers } from '../../../redux/actions/admin';
 
-class AdminOrders extends React.Component {
+class AdminUsers extends React.Component {
   componentDidMount() {
-    this.props.getAllUsers().then(() => {
-      this.props.getAllOrders();
-    });
+    this.props.getAllUsers();
   }
 
   render() {
-    if (this.props.admin.orders.length) {
+    if (this.props.admin.users.length) {
       return (
-        <Table
-          orders={this.props.admin.orders}
-          users={this.props.admin.users}
-          tableName="Все заказы"
-        />
+        <Table users={this.props.admin.users} tableName="Все пользователи" />
       );
     }
 
@@ -32,17 +26,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getAllOrders,
   getAllUsers
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(AdminOrders));
+)(withRouter(AdminUsers));
 
-AdminOrders.propTypes = {
+AdminUsers.propTypes = {
   admin: PropTypes.object,
-  getAllOrders: PropTypes.func,
   getAllUsers: PropTypes.func
 };

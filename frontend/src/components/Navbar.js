@@ -93,6 +93,9 @@ class Navbar extends Component {
             <Link to="/admin/orders" className="dropdown-item">
               Заказы
             </Link>
+            <Link to="/admin/users" className="dropdown-item">
+              Пользователи
+            </Link>
             <Link className="dropdown-item" to="/profile">
               Мой профиль
             </Link>

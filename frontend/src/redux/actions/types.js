@@ -22,3 +22,4 @@ export const ORDER_SAVED = 'ORDER_SAVED';
 export const SET_CURRENT_USER_ORDERS = 'SET_CURRENT_USER_ORDERS';
 
 export const SET_ALL_ORDERS = 'SET_ALL_ORDERS';
+export const SET_ALL_USERS = 'SET_ALL_USERS';

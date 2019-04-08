@@ -16,7 +16,7 @@ export default function Table(props) {
               <tbody key={order.orderDetails.id} className="border-dark">
                 <tr>
                   <th>ID заказа</th>
-                  <th>ID пользователя</th>
+                  <th>Клиент</th>
                   <th>Дата создания</th>
                   <th>Цена, BYN</th>
                   <th>Статус оплаты</th>
@@ -27,7 +27,13 @@ export default function Table(props) {
                 </tr>
                 <tr key={order.orderDetails.id} colSpan={0}>
                   <td className="border">{order.orderDetails.id}</td>
-                  <td className="border">{order.orderDetails.user_id}</td>
+                  <td className="border">
+                    {
+                      props.users.find(user => {
+                        return order.orderDetails.user_id === user.id;
+                      }).name
+                    }
+                  </td>
                   <td className="border">{order.orderDetails.created_at}</td>
                   <td className="border">
                     {order.orderDetails.price || 'Не выставлена'}
@@ -39,44 +45,15 @@ export default function Table(props) {
                     {order.orderDetails.delivery_status}
                   </td>
                   <th colSpan={3} className="d-flex justify-content-end">
-                    {order.orderDetails.payment_status === 'Не оплачен' &&
-                      order.orderDetails.price !== null && (
-                        <td>
-                          <button
-                            className="btn btn-outline-success"
-                            onClick={() =>
-                              props.onReportPaymentButtonClick(
-                                order.orderDetails.id
-                              )
-                            }>
-                            Сообщить об оплате
-                          </button>
-                        </td>
-                      )}
-                    {order.orderDetails.delivery_status === 'Отправлен' && (
-                      <td>
-                        <button
-                          className="btn btn-outline-success"
-                          onClick={() =>
-                            props.onReportReceptionButtonClick(
-                              order.orderDetails.id
-                            )
-                          }>
-                          Сообщить о получении
-                        </button>
-                      </td>
-                    )}
-                    <td>
-                      <button
-                        className="btn btn-primary collapsed text-center"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target={`#order${order.orderDetails.id}`}
-                        aria-expanded="false"
-                        aria-controls={`order${order.orderDetails.id}`}>
-                        Просмотр
-                      </button>
-                    </td>
+                    <button
+                      className="btn btn-primary collapsed text-center"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target={`#order${order.orderDetails.id}`}
+                      aria-expanded="false"
+                      aria-controls={`order${order.orderDetails.id}`}>
+                      Просмотр
+                    </button>
                   </th>
                 </tr>
                 <tr className="collapse" id={`order${order.orderDetails.id}`}>
@@ -97,7 +74,6 @@ export default function Table(props) {
 
 Table.propTypes = {
   orders: PropTypes.array,
-  onReportPaymentButtonClick: PropTypes.func,
-  onReportReceptionButtonClick: PropTypes.func,
+  users: PropTypes.array,
   tableName: PropTypes.string
 };
