@@ -50,6 +50,8 @@ Route::middleware(['cors'])->group(function () {
 
                 Route::get('orders', 'AdminController@getAllOrders');
 
+                Route::get('users', 'AdminController@getAllUsers');
+
                 Route::get('orders/{id}', 'AdminController@getOrdersById');
 
                 Route::put('order', 'AdminController@updateOrder');

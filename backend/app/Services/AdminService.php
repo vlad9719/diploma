@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\User;
 
 /**
  * Class AdminService
@@ -30,6 +31,16 @@ class AdminService
             array_push($orders, $order);
         }
         return $orders;
+    }
+
+    /**
+     * @return User[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllUsers()
+    {
+        $users = User::all();
+
+        return $users;
     }
 
     /**

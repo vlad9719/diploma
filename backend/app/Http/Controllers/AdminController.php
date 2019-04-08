@@ -41,6 +41,18 @@ class AdminController extends Controller
 
     /**
      * @param AdminService $adminService
+     * @return JsonResponse
+     */
+    public function getAllUsers(AdminService $adminService) : JsonResponse
+    {
+        $users = $adminService->getAllUsers();
+
+        $this->response->data['users'] = $users;
+        return new JsonResponse($this->response, JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * @param AdminService $adminService
      * @param UpdateOrderRequest $updateOrderRequest
      * @return JsonResponse
      */
