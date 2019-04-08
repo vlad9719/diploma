@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->float('price')->nullable();
             $table->enum('delivery_status', ['Обрабатывается', 'Собран', 'Отправлен', 'Получен'])->default('Обрабатывается');
-            $table->enum('payment_status', ['Не оплачен', 'Оплачен'])->default('Не оплачен');
+            $table->enum('payment_status', ['Не оплачен', 'Оплата произведена', 'Оплата подтверждена'])->default('Не оплачен');
             $table->date('created_at');
         });
     }

@@ -45,6 +45,10 @@ class AdminService
                 continue;
             }
 
+            if ($field === 'payment_status' && $value === 'Оплата произведена') {
+                continue;
+            }
+
             $order[$field] = $value;
         }
 

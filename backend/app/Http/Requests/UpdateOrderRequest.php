@@ -31,7 +31,7 @@ class UpdateOrderRequest extends FormRequest
         return [
             'id' => 'bail|required|exists:orders',
             'payment_status' => ['bail',
-                Rule::in(['Оплачен', 'Не оплачен'])],
+                Rule::in(['Не оплачен', 'Оплата произведена', 'Оплата подтверждена'])],
             'delivery_status' => ['bail',
                 Rule::in(['Обрабатывается', 'Собран', 'Отправлен', 'Получен'])],
             'price' => 'bail|numeric',

@@ -114,10 +114,13 @@ class OrderService
 
         if (isset($fields['delivery_status']) && $fields['delivery_status'] === 'Получен') {
             $order->delivery_status = $fields['delivery_status'];
-            $order->save();
-            return $order;
         }
 
+        if (isset($fields['payment_status']) && $fields['payment_status'] === 'Оплата произведена') {
+            $order->payment_status = $fields['payment_status'];
+        }
+
+        $order->save();
         return $order;
     }
 
