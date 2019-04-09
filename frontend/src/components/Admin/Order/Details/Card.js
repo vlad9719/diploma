@@ -67,13 +67,14 @@ export default function Card(props) {
                 placeholder="Цена, BYN"
                 step="0.01"
                 onChange={props.handleChange}
+                required={true}
               />
             </div>
             <button
               className="btn btn-outline-warning text-center"
               type="submit"
               onClick={event => props.handleSubmit(event, orderDetails.id)}
-              aria-required={true}>
+              >
               Выставить цену
             </button>
           </form>

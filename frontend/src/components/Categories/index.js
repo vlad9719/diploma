@@ -49,7 +49,7 @@ export default connect(
 )(withRouter(Categories));
 
 Categories.propTypes = {
-  categories: PropTypes.array,
+  categories: PropTypes.object,
   getCategories: PropTypes.func,
   match: PropTypes.object
 };

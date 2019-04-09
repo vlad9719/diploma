@@ -58,5 +58,5 @@ AdminOrders.propTypes = {
   getAllOrders: PropTypes.func,
   getAllUsers: PropTypes.func,
   deleteOrder: PropTypes.func,
-  history: PropTypes.array
+  history: PropTypes.object
 };

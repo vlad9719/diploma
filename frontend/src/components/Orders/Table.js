@@ -36,46 +36,41 @@ export default function Table(props) {
                   <td className="border">
                     {order.orderDetails.delivery_status}
                   </td>
-                  <th colSpan={3} className="d-flex justify-content-end">
+                  <td colSpan={3} className="d-flex justify-content-end border-bottom">
                     {order.orderDetails.payment_status === 'Не оплачен' &&
                       order.orderDetails.price !== null && (
-                        <td>
-                          <button
-                            className="btn btn-outline-success"
-                            onClick={() =>
-                              props.onReportPaymentButtonClick(
-                                order.orderDetails.id
-                              )
-                            }>
-                            Сообщить об оплате
-                          </button>
-                        </td>
-                      )}
-                    {order.orderDetails.delivery_status === 'Отправлен' && (
-                      <td>
                         <button
-                          className="btn btn-outline-success"
+                          className="btn btn-outline-success mx-1"
                           onClick={() =>
-                            props.onReportReceptionButtonClick(
+                            props.onReportPaymentButtonClick(
                               order.orderDetails.id
                             )
                           }>
-                          Сообщить о получении
+                          Сообщить об оплате
                         </button>
-                      </td>
-                    )}
-                    <td>
+                      )}
+                    {order.orderDetails.delivery_status === 'Отправлен' && (
                       <button
-                        className="btn btn-primary collapsed text-center"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target={`#order${order.orderDetails.id}`}
-                        aria-expanded="false"
-                        aria-controls={`order${order.orderDetails.id}`}>
-                        Просмотр
+                        className="btn btn-outline-success mx-1"
+                        onClick={() =>
+                          props.onReportReceptionButtonClick(
+                            order.orderDetails.id
+                          )
+                        }>
+                        Сообщить о получении
                       </button>
-                    </td>
-                  </th>
+                    )}
+
+                    <button
+                      className="btn btn-primary collapsed text-center mx-1"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target={`#order${order.orderDetails.id}`}
+                      aria-expanded="false"
+                      aria-controls={`order${order.orderDetails.id}`}>
+                      Просмотр
+                    </button>
+                  </td>
                 </tr>
                 <tr className="collapse" id={`order${order.orderDetails.id}`}>
                   <td colSpan={7}>

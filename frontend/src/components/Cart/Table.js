@@ -30,6 +30,7 @@ export default function Table(props) {
             value={item.quantity}
             min="1"
             max="100"
+            readOnly={true}
           />
           <span className="input-group-btn">
             <button

@@ -48,5 +48,5 @@ export default connect(
 AdminUsers.propTypes = {
   admin: PropTypes.object,
   getAllUsers: PropTypes.func,
-  history: PropTypes.array
+  history: PropTypes.object
 };

@@ -96,5 +96,5 @@ Orders.propTypes = {
   fillCart: PropTypes.func,
   me: PropTypes.func,
   orders: PropTypes.object,
-  history: PropTypes.array
+  history: PropTypes.object
 };

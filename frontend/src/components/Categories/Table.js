@@ -11,7 +11,9 @@ export default function Table(props) {
       <div className="container mt-2 offset-sm-2 col-sm-8 my-3 d-flex flex-wrap">
         {props.categories.map(category => {
           return (
-            <div className="border col-sm-12 col-md-6 col-12 col-lg-4 ml-0" key={category.id}>
+            <div
+              className="border col-sm-12 col-md-6 col-12 col-lg-4 ml-0"
+              key={category.id}>
               <Link
                 to={`../products/${category.name}`}
                 className="d-flex justify-content-center align-items-center">

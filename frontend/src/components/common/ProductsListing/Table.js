@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { MDBDataTable } from 'mdbreact';
 import CartButton from './CartButton';
@@ -62,7 +63,13 @@ export default function ProductsTable(props) {
 
   return (
     <div className="offset-sm-1 col-sm-10 my-5">
-      <h3 className="text-center my-5">{props.tableName}</h3>
+      <h3 className="text-center mt-5">{props.tableName}</h3>
+      {!props.isAuthenticated && (
+        <div className="text-center my-3">
+          Чтобы заказать продукцию, пожалуйста, <Link to="/login">войдите</Link>{' '}
+          или <Link to="/register">зарегистрируйтесь</Link>
+        </div>
+      )}
       <MDBDataTable
         striped
         bordered
@@ -73,6 +80,9 @@ export default function ProductsTable(props) {
         paginationLabel={['Назад', 'Вперёд']}
         infoLabel={['Строки', '-', 'из']}
         responsiveXl={true}
+        responsiveSm={true}
+        responsiveLg={true}
+        responsiveMd={true}
       />
     </div>
   );
@@ -82,7 +92,7 @@ ProductsTable.propTypes = {
   products: PropTypes.array,
   category: PropTypes.string,
   isAuthenticated: PropTypes.bool,
-  isAdmin: PropTypes.bool,
+  isAdmin: PropTypes.number,
   tableName: PropTypes.string,
   onAddToCartButtonClick: PropTypes.func,
   productIsInTheCart: PropTypes.func

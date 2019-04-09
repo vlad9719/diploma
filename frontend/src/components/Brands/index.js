@@ -33,6 +33,6 @@ export default connect(
 )(withRouter(Catalog));
 
 Catalog.propTypes = {
-  brands: PropTypes.array,
+  brands: PropTypes.object,
   getBrands: PropTypes.func
 };

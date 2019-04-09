@@ -16,10 +16,17 @@ class AdminOrdersByUser extends React.Component {
       isLoading: true
     };
     this.onEditOrderButtonClick = this.onEditOrderButtonClick.bind(this);
+    this.onDeleteOrderButtonClick = this.onDeleteOrderButtonClick.bind(this);
   }
 
   onEditOrderButtonClick(orderId) {
     this.props.history.push(`/admin/order/${orderId}`);
+  }
+
+  onDeleteOrderButtonClick(orderId) {
+    this.props.deleteOrder(orderId).then(() => {
+      this.props.getOneUserOrders(this.props.match.params.id);
+    });
   }
 
   componentDidMount() {
@@ -46,7 +53,7 @@ class AdminOrdersByUser extends React.Component {
           orders={this.props.admin.userOrders}
           tableName={`Заказы пользователя ${userName}`}
           users={this.props.admin.users}
-          deleteOrder={this.props.deleteOrder}
+          deleteOrder={this.onDeleteOrderButtonClick}
           onEditOrderButtonClick={this.onEditOrderButtonClick}
         />
       );
