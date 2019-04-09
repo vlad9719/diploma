@@ -47,7 +47,7 @@ export default function Card(props) {
 
         {orderDetails.delivery_status === 'Собран' && (
           <button
-            className="btn btn-outline-success text-center"
+            className="btn btn-outline-success text-center update-status-button"
             type="button"
             onClick={() => {
               props.updateOrderDeliveryStatus(orderDetails.id, 'Отправлен');

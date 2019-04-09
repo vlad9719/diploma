@@ -18,6 +18,7 @@ import AdminOrders from 'components/Admin/Order/List';
 import AdminUsers from 'components/Admin/Users';
 import AdminOrdersByUser from 'components/Admin/Users/Orders';
 import OrderDetails from 'components/Admin/Order/Details';
+import { Redirect } from 'react-router-dom';
 
 import Home from 'components/Home';
 import Layout from 'components/Layout';
@@ -26,6 +27,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min';
 import 'index.css';
 
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      rest.isPermissions ? <Component {...props} /> : <Redirect to="/login" />
+    }
+  />
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +43,10 @@ class App extends Component {
   }
 
   render() {
+    const { isAuthenticated } = this.props.user;
+
+    const { isAdmin } = this.props.user.userInfo;
+
     return (
       <Provider store={store}>
         <Router>
@@ -40,21 +54,52 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={Profile} />
             <Route exact path="/catalog" component={Brands} />
             <Route exact path="/categories/:brand" component={Categories} />
             <Route exact path="/products/:category" component={Products} />
             <Route exact path="/search/:query" component={Search} />
-            <Route exact path="/cart" component={Cart} />
-            <Route exact path="/orders" component={Orders} />
-            <Route exact path="/admin/orders" component={AdminOrders} />
-            <Route exact path="/admin/users" component={AdminUsers} />
-            <Route
+            <PrivateRoute
+              isPermissions={isAuthenticated}
+              exact
+              path="/profile"
+              component={Profile}
+            />
+            <PrivateRoute
+              isPermissions={isAuthenticated && !isAdmin}
+              exact
+              path="/cart"
+              component={Cart}
+            />
+            <PrivateRoute
+              isPermissions={isAuthenticated && !isAdmin}
+              exact
+              path="/orders"
+              component={Orders}
+            />
+            <PrivateRoute
+              isPermissions={isAuthenticated && isAdmin}
+              exact
+              path="/admin/orders"
+              component={AdminOrders}
+            />
+            <PrivateRoute
+              isPermissions={isAuthenticated && isAdmin}
+              exact
+              path="/admin/users"
+              component={AdminUsers}
+            />
+            <PrivateRoute
+              isPermissions={isAuthenticated && isAdmin}
               exact
               path="/admin/orders/:id"
               component={AdminOrdersByUser}
             />
-            <Route exact path="/admin/order/:id" component={OrderDetails} />
+            <PrivateRoute
+              isPermissions={isAuthenticated && isAdmin}
+              exact
+              path="/admin/order/:id"
+              component={OrderDetails}
+            />
           </Layout>
         </Router>
       </Provider>
@@ -78,5 +123,7 @@ export default connect(
 )(App);
 
 App.propTypes = {
-  me: PropTypes.func
+  me: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
+  user: PropTypes.object
 };
