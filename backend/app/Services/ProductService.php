@@ -25,6 +25,11 @@ class ProductService
         }
 
         $products = $category->products;
+        foreach ($products as $product) {
+            $category = $product->categories()->first();
+            $product['category'] = $category->name;
+            $product['brand'] = $category->brands()->first()->name;
+        }
         return $products;
     }
 

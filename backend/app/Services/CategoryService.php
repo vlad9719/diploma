@@ -26,6 +26,9 @@ class CategoryService
         }
 
         $categories = $brand->categories;
+        foreach($categories as $category) {
+            $category['brand'] = $category->brands()->first()->name;
+        }
 
         return $categories;
     }
