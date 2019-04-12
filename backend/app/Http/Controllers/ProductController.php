@@ -27,6 +27,11 @@ class ProductController extends Controller
         return new JsonResponse($this->response, JsonResponse::HTTP_OK);
     }
 
+    /**
+     * @param SearchRequest $request
+     * @param ProductService $productService
+     * @return JsonResponse
+     */
     public function search(SearchRequest $request, ProductService $productService) : JsonResponse
     {
         $searchParameter = $request->validated();
@@ -34,6 +39,20 @@ class ProductController extends Controller
         $products = $productService->search($name);
 
         $this->response->data['products'] = $products;
+        return new JsonResponse($this->response, JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * @param Request $request
+     * @param ProductService $productService
+     * @return JsonResponse
+     */
+    public function getAllProductsNumberByCategory(Request $request, ProductService $productService) : JsonResponse
+    {
+        $productsCategory = $request->input('category');
+        $count = $productService->getAllProductsNumberByCategory($productsCategory);
+
+        $this->response->data['count'] = $count;
         return new JsonResponse($this->response, JsonResponse::HTTP_OK);
     }
 }

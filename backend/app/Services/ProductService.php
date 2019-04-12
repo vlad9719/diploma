@@ -43,4 +43,24 @@ class ProductService
 
         return $searchResult;
     }
+
+    /**
+     * @param string $productCategory
+     * @return int
+     */
+    public function getAllProductsNumberByCategory(string $productCategory) : int
+    {
+        $categories = Category::where('name', 'like', '%'. $productCategory. '%')->get();
+        if (!isset($categories)) {
+            throw new ModelNotFoundException;
+        }
+
+        $count = 0;
+        foreach($categories as $category) {
+            $productsCount = $category->products()->count();
+            $count += $productsCount;
+        }
+
+        return $count;
+    }
 }

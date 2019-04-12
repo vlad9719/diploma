@@ -23,6 +23,8 @@ Route::middleware(['cors'])->group(function () {
 
     Route::get('products', 'ProductController@getProductsByCategory');
 
+    Route::get('products/number', 'ProductController@getAllProductsNumberByCategory');
+
     Route::get('search', 'ProductController@search');
 
     Route::middleware('auth')->group(function () {
